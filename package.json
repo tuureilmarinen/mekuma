@@ -1,0 +1,36 @@
+{
+  "name": "mekuma",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "watch": "nodemon index.js",
+    "debug": "node inspect index.js",
+    "lint": "eslint .",
+    "test": "jest --verbose"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tuureilmarinen/mekuma.git"
+  },
+  "author": "Tuure Ilmarinen",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/tuureilmarinen/mekuma/issues"
+  },
+  "homepage": "https://github.com/tuureilmarinen/mekuma#readme",
+  "dependencies": {
+    "axios": "^0.18.0",
+    "cors": "^2.8.4",
+    "express": "^4.16.4",
+    "format-unicorn": "^1.1.1",
+    "ical-generator": "^1.2.1",
+    "jest": "^22.2.2",
+    "moment": "^2.22.2",
+    "node-fetch": "^2.2.0"
+  },
+  "devDependencies": {
+    "nodemon": "^1.14.12"
+  }
+}
