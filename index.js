@@ -11,15 +11,22 @@ const getRestaurantPaths = require('./getRestaurantPaths');
 const getMenu = require('./getMenu');
 const parseMenuItems = require('./parseMenuItems');
 const mekumaFilter = require('./mekumaFilter');
+const cache = require('./cache');
 
 
-const config = {port: 9005, restaurantListPath:'https://messi.hyyravintolat.fi/publicapi/restaurants', restaurantPathTemplate: 'https://messi.hyyravintolat.fi/publicapi/restaurant/{restaurantId}'}
+const config = {
+    port: process.env.PORT || 9000,
+    restaurantListPath: process.env.RESTAURANT_LIST_URL || 'https://messi.hyyravintolat.fi/publicapi/restaurants',
+    restaurantPathTemplate: process.env.RESTAURANT_URL_TEMPLATE || 'https://messi.hyyravintolat.fi/publicapi/restaurant/{restaurantId}',
+    cache: process.env.CACHE || 60
+};
+
 
 // https://messi.hyyravintolat.fi/publicapi/restaurant/9
 
 // https://messi.hyyravintolat.fi/publicapi/restaurants
 
-app.get('/mekuma.ical', async (req,res) => {
+app.get('/mekuma.ical', cache(config.cache), async (req,res) => {
     const cal = ical({
         domain: 'mekuma.herokuapp.com',
         prodId: {company: 'mekuma', product: 'ical-generator'},
