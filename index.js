@@ -6,6 +6,7 @@ const cors = require('cors')
 const ical = require('ical-generator');
 
 const moment = require('moment');
+require('moment-timezone');
 //const fetch = require("node-fetch");
 const getRestaurantPaths = require('./getRestaurantPaths');
 const getMenu = require('./getMenu');
@@ -18,7 +19,8 @@ const config = {
     port: process.env.PORT || 9000,
     restaurantListPath: process.env.RESTAURANT_LIST_URL || 'https://messi.hyyravintolat.fi/publicapi/restaurants',
     restaurantPathTemplate: process.env.RESTAURANT_URL_TEMPLATE || 'https://messi.hyyravintolat.fi/publicapi/restaurant/{restaurantId}',
-    cache: process.env.CACHE || 60
+    cache: process.env.CACHE || 60,
+    tz: process.env.TZ || 'Europe/Helsinki',
 };
 
 
@@ -43,12 +45,12 @@ app.get('/mekuma.ics', cache(config.cache), async (req,res) => {
 
     mekumas.forEach(mekuma => {
         try {
-            const start = moment(mekuma.open);
-            const end = moment(mekuma.close);
+            const start = moment(mekuma.open).tz(config.tz);
+            const end = moment(mekuma.close).tz(config.tz);
             cal.createEvent({
                 start,
                 end,
-                timestamp: moment(),
+                timestamp: moment().tz(config.tz),
                 summary: "Mekumahekuma",
                 location: `Unicafe ${mekuma.restaurant.restaurant}, ${mekuma.restaurant.address}, ${mekuma.restaurant.zip}, ${mekuma.restaurant.city}`
             })
