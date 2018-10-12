@@ -33,7 +33,7 @@ app.get('/mekuma.ics', cache(config.cache, "text/calendar"), async (req,res) => 
         domain: 'mekuma.herokuapp.com',
         prodId: {company: 'mekuma', product: 'ical-generator'},
         name: 'Mekuma',
-        timezone: 'Europe/Helsinki'
+        //timezone: 'Europe/Helsinki'
     });
 
     const restaurantPaths = await getRestaurantPaths(config.restaurantListPath, config.restaurantPathTemplate);
@@ -45,12 +45,12 @@ app.get('/mekuma.ics', cache(config.cache, "text/calendar"), async (req,res) => 
 
     mekumas.forEach(mekuma => {
         try {
-            const start = moment(mekuma.open).tz(config.tz).utc();
-            const end = moment(mekuma.close).tz(config.tz).utc();
+            const start = moment(moment(mekuma.open).tz(config.tz).utc())
+            const end = moment(moment(mekuma.close).tz(config.tz).utc())
             cal.createEvent({
                 start,
                 end,
-                timestamp: moment().tz(config.tz).utc(),
+                timestamp: moment(moment().tz(config.tz).utc()),
                 summary: `Mekuma ${mekuma.restaurant.restaurant}`,
                 location: `Unicafe ${mekuma.restaurant.restaurant}, ${mekuma.restaurant.address}, ${mekuma.restaurant.zip}, ${mekuma.restaurant.city}`
             })
