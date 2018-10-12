@@ -1,3 +1,2 @@
-module.exports = (menuItems) => {
-    return menuItems.filter(item => item.sku==785 )
-}
+// eslint-disable-next-line eqeqeq
+module.exports = menuItems => menuItems.filter(item => item.sku == 785);
