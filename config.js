@@ -3,7 +3,6 @@ const config = {
     restaurantListPath: process.env.RESTAURANT_LIST_URL || 'https://messi.hyyravintolat.fi/publicapi/restaurants',
     restaurantPathTemplate: process.env.RESTAURANT_URL_TEMPLATE || 'https://messi.hyyravintolat.fi/publicapi/restaurant/{restaurantId}',
     cache: process.env.CACHE || 5,
-    redis: provess.env.REDIS_URL || null,
     tz: process.env.TZ || 'Europe/Helsinki',
 };
 
