@@ -5,7 +5,7 @@ const app = express()
 const cors = require('cors')
 const ical = require('ical-generator');
 
-const axios = require('axios');
+const moment = require('moment');
 //const fetch = require("node-fetch");
 const getRestaurantPaths = require('./getRestaurantPaths');
 const getMenu = require('./getMenu');
@@ -36,10 +36,12 @@ app.get('/mekuma.ical', async (req,res) => {
 
     mekumas.forEach(mekuma => {
         try {
+            const start = moment(mekuma.open);
+            const stop = moment(mekuma.close);
             cal.createEvent({
-                start: Date.parse(mekuma.open),
-                stop: Date.parse(mekuma.close),
-                timestamp: Date.now(),
+                start,
+                stop,
+                timestamp: moment(),
                 summary: "Mekumahekuma",
                 location: `Unicafe ${mekuma.restaurant.restaurant}, ${mekuma.restaurant.address}, ${mekuma.restaurant.zip}, ${mekuma.restaurant.city}`
             })
@@ -49,7 +51,7 @@ app.get('/mekuma.ical', async (req,res) => {
         }
     });
 
-    res.send(cal);
+    res.send(cal.toString());
 });
 
 
