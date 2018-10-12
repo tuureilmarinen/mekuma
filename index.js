@@ -44,10 +44,10 @@ app.get('/mekuma.ics', cache(config.cache), async (req,res) => {
     mekumas.forEach(mekuma => {
         try {
             const start = moment(mekuma.open);
-            const stop = moment(mekuma.close);
+            const end = moment(mekuma.close);
             cal.createEvent({
                 start,
-                stop,
+                end,
                 timestamp: moment(),
                 summary: "Mekumahekuma",
                 location: `Unicafe ${mekuma.restaurant.restaurant}, ${mekuma.restaurant.address}, ${mekuma.restaurant.zip}, ${mekuma.restaurant.city}`
