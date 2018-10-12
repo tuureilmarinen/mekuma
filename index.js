@@ -26,7 +26,7 @@ const config = {
 
 // https://messi.hyyravintolat.fi/publicapi/restaurants
 
-app.get('/mekuma.ical', cache(config.cache), async (req,res) => {
+app.get('/mekuma.ics', cache(config.cache), async (req,res) => {
     const cal = ical({
         domain: 'mekuma.herokuapp.com',
         prodId: {company: 'mekuma', product: 'ical-generator'},
@@ -57,7 +57,7 @@ app.get('/mekuma.ical', cache(config.cache), async (req,res) => {
             debugger;
         }
     });
-
+    res.header("Content-Type", "text/calendar");
     res.send(cal.toString());
 });
 
