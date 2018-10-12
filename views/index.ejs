@@ -1,0 +1,29 @@
+<!doctype html>
+
+<html lang="fi">
+<head>
+    <meta charset="utf-8">
+
+    <title>Mekumatutka</title>
+    <meta name="description" content="Meksikolaisen uunimakkaran löytäjä">
+    <meta name="author" content="Mekuma">
+</head>
+
+<body>
+    <div>
+        <h1>Mekumatutka</h1>
+        <% let found = false; %>
+        <% mekumas.forEach(mekuma=>{ %>
+            <% found = true; %>
+            <h2><%- mekuma.restaurant.restaurant %> <%- (new Date(parseInt(mekuma.open))).toDateString("fi-FI") %></h2>
+            <b><%- (new Date(parseInt(mekuma.open))).toLocaleTimeString("fi-FI") %></b> - <b><%- (new Date(parseInt(mekuma.close))).toLocaleTimeString("fi-FI") %></b><br/>
+            <small><%- `Unicafe ${mekuma.restaurant.restaurant}, ${mekuma.restaurant.address}, ${mekuma.restaurant.zip}, ${mekuma.restaurant.city}` %></small>
+        <% }) %>
+        <% if(!found) { %>
+            <%=  %>
+        <% } %>
+    </div>
+    <br/>
+    <a href="/mekuma.ics">Lisää mekumatutka kalenteriisi!</a>
+</body>
+</html>

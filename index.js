@@ -4,6 +4,7 @@ const app = express()
 //const bodyParser = require('body-parser')
 const cors = require('cors')
 const ical = require('ical-generator');
+const ejs = require('ejs');
 
 const moment = require('moment');
 require('moment-timezone');
@@ -19,10 +20,12 @@ const config = {
     port: process.env.PORT || 9000,
     restaurantListPath: process.env.RESTAURANT_LIST_URL || 'https://messi.hyyravintolat.fi/publicapi/restaurants',
     restaurantPathTemplate: process.env.RESTAURANT_URL_TEMPLATE || 'https://messi.hyyravintolat.fi/publicapi/restaurant/{restaurantId}',
-    cache: process.env.CACHE || 60,
+    cache: process.env.CACHE || 5,
     tz: process.env.TZ || 'Europe/Helsinki',
 };
 
+
+app.set('view engine', 'ejs');
 
 // https://messi.hyyravintolat.fi/publicapi/restaurant/9
 
@@ -63,6 +66,17 @@ app.get('/mekuma.ics', cache(config.cache, "text/calendar"), async (req,res) => 
     res.send(cal.toString());
 });
 
+//app.get('/', cache(config.cache, "text/html"), async (req,res) => {
+app.get('/', async (req,res) => {
+    const restaurantPaths = await getRestaurantPaths(config.restaurantListPath, config.restaurantPathTemplate);
+    const promises = restaurantPaths.map(async path => getMenu(path.url));
+    const results = await Promise.all(promises)
+    // restaurant -> date -> food
+    const menuItems = parseMenuItems(results);
+    const mekumas = mekumaFilter(menuItems);
+    mekumas.sort((a,b)=>a.open-b.open);
+    res.render('index', {mekumas});
+});
 
 const server = http.createServer(app)
 
