@@ -45,12 +45,12 @@ app.get('/mekuma.ics', cache(config.cache, "text/calendar"), async (req,res) => 
 
     mekumas.forEach(mekuma => {
         try {
-            const start = moment(mekuma.open).tz(config.tz);
-            const end = moment(mekuma.close).tz(config.tz);
+            const start = moment(mekuma.open).tz(config.tz).utc();
+            const end = moment(mekuma.close).tz(config.tz).utc();
             cal.createEvent({
                 start,
                 end,
-                timestamp: moment().tz(config.tz),
+                timestamp: moment().tz(config.tz).utc(),
                 summary: `Mekuma ${mekuma.restaurant.restaurant}`,
                 location: `Unicafe ${mekuma.restaurant.restaurant}, ${mekuma.restaurant.address}, ${mekuma.restaurant.zip}, ${mekuma.restaurant.city}`
             })
