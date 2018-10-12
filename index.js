@@ -51,7 +51,7 @@ app.get('/mekuma.ics', cache(config.cache), async (req,res) => {
                 start,
                 end,
                 timestamp: moment().tz(config.tz),
-                summary: "Mekumahekuma",
+                summary: `Mekuma ${mekuma.restaurant.restaurant}`,
                 location: `Unicafe ${mekuma.restaurant.restaurant}, ${mekuma.restaurant.address}, ${mekuma.restaurant.zip}, ${mekuma.restaurant.city}`
             })
         } catch (e) {
