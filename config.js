@@ -5,6 +5,7 @@ const config = {
 	cache: process.env.CACHE || 5,
 	tz: process.env.TZ || 'Europe/Helsinki',
 	redis: process.env.REDIS_URL,
+	trackingId: process.env.TRACKING_ID,
 };
 
 module.exports = config;
