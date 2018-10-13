@@ -7,23 +7,44 @@
     <title>Mekumatutka</title>
     <meta name="description" content="Meksikolaisen uunimakkaran löytäjä">
     <meta name="author" content="Mekuma">
+    <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/pure-min.css" integrity="sha384-nn4HPE8lTHyVtfCBi5yW9d20FjT8BJwUXyWZT9InLYax14RDjBj46LmSztkmNP9w" crossorigin="anonymous">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 
 <body>
-    <div>
-        <h1>Mekumatutka</h1>
+    <div id="main">
+        <div class="header">
+            <h1>Mekumatutka</h1>
+            <h2>Meksikolainen uunimakkara ftw!</h2>
+        </div>
         <% let found = false; %>
         <% mekumas.forEach(mekuma=>{ %>
             <% found = true; %>
-            <h2><%- mekuma.restaurant.restaurant %> <%- (new Date(parseInt(mekuma.open))).toDateString("fi-FI") %></h2>
-            <b><%- (new Date(parseInt(mekuma.open))).toLocaleTimeString("fi-FI") %></b> - <b><%- (new Date(parseInt(mekuma.close))).toLocaleTimeString("fi-FI") %></b><br/>
-            <small><%- `Unicafe ${mekuma.restaurant.restaurant}, ${mekuma.restaurant.address}, ${mekuma.restaurant.zip}, ${mekuma.restaurant.city}` %></small>
+            <div class="content">
+                <h2 class="content-subhead"><%- mekuma.restaurant.restaurant %> <%- (new Date(parseInt(mekuma.open))).toDateString("fi-FI") %></h2>
+                <p>
+                    <b><%- (new Date(parseInt(mekuma.open))).toLocaleTimeString("fi-FI") %></b> - <b><%- (new Date(parseInt(mekuma.close))).toLocaleTimeString("fi-FI") %></b><br/>
+                    <small><%- `Unicafe ${mekuma.restaurant.restaurant}, ${mekuma.restaurant.address}, ${mekuma.restaurant.zip}, ${mekuma.restaurant.city}` %></small>
+                <p>
+            </div>
         <% }) %>
         <% if(!found) { %>
             <%=  %>
         <% } %>
+        <div class="content">
+            <aside>
+                <p>
+                    Vaihtoehtoisesti voit <a href="/mekuma.ics">lisätä mekumatutkan</a> kalenteriisi!
+                    <br/>
+                    <b>https://mekuma.herokuapp.com/mekuma.ics</b>
+                </p>
+            </aside>
+        </div>
     </div>
     <br/>
+
+    
     <a href="/mekuma.ics">Lisää mekumatutka kalenteriisi!</a>
 </body>
 </html>
+
