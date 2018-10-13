@@ -1,8 +1,11 @@
-const mcache = require('memory-cache');
+const redis = require('async-redis');
+const config = require('./config');
 
-const cache = (duration, type) => (req, res, next) => {
+const client = redis.createClient(config.redis);
+
+const cache = (duration, type) => async (req, res, next) => {
 	const key = `__express__${req.originalUrl}` || req.url;
-	const cachedBody = mcache.get(key);
+	const cachedBody = await client.get(key);
 	if (cachedBody) {
 		if (type) {
 			res.header('Content-Type', type);
@@ -10,8 +13,8 @@ const cache = (duration, type) => (req, res, next) => {
 		res.send(cachedBody);
 	} else {
 		res.sendResponse = res.send;
-		res.send = (body) => {
-			mcache.put(key, body, duration * 1000);
+		res.send = async (body) => {
+			await client.set(key, body);
 			res.sendResponse(body);
 		};
 		next();

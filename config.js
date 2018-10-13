@@ -4,6 +4,7 @@ const config = {
 	restaurantPathTemplate: process.env.RESTAURANT_URL_TEMPLATE || 'https://messi.hyyravintolat.fi/publicapi/restaurant/{restaurantId}',
 	cache: process.env.CACHE || 5,
 	tz: process.env.TZ || 'Europe/Helsinki',
+	redis: process.env.REDIS_URL,
 };
 
 module.exports = config;
