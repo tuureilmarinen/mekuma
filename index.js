@@ -67,7 +67,7 @@ app.get('/', cache(config.cache, 'text/html'), async (req, res) => {
 	const menuItems = parseMenuItems(results);
 	const mekumas = mekumaFilter(menuItems);
 	mekumas.sort((a, b) => a.open - b.open);
-	res.render('index', { mekumas });
+	res.render('index', { mekumas, config });
 });
 
 const server = http.createServer(app);
