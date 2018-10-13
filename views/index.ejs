@@ -27,8 +27,9 @@
                         <%- (new Date(parseInt(mekuma.open))).toDateString("fi-FI") %>
                     </small>
                 </h2>
+                <br/>
                 <p>
-                    <b><%- (new Date(parseInt(mekuma.open))).toLocaleTimeString("fi-FI") %></b> - <b><%- (new Date(parseInt(mekuma.close))).toLocaleTimeString("fi-FI") %></small>
+                    <b><%- (new Date(parseInt(mekuma.open))).toLocaleTimeString("fi-FI") %></b> - <b><%- (new Date(parseInt(mekuma.close))).toLocaleTimeString("fi-FI") %></b>
                 
                     <%- `Unicafe ${mekuma.restaurant.restaurant}, ${mekuma.restaurant.address}, ${mekuma.restaurant.zip}, ${mekuma.restaurant.city}` %>
                 <p>
