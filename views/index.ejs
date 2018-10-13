@@ -22,13 +22,18 @@
             <% found = true; %>
             <div class="content">
                 <h2 class="content-subhead">
-                    <%- mekuma.restaurant.restaurant %> <%- (new Date(parseInt(mekuma.open))).toDateString("fi-FI") %>
-                    <small class="text-muted"><%- (new Date(parseInt(mekuma.open))).toLocaleTimeString("fi-FI") %></b> - <b><%- (new Date(parseInt(mekuma.close))).toLocaleTimeString("fi-FI") %></small>
-                    </h2>
+                    <%- mekuma.restaurant.restaurant %>
+                    <small class="text-muted">
+                        <%- (new Date(parseInt(mekuma.open))).toDateString("fi-FI") %>
+                    </small>
+                </h2>
                 <p>
+                    <b><%- (new Date(parseInt(mekuma.open))).toLocaleTimeString("fi-FI") %></b> - <b><%- (new Date(parseInt(mekuma.close))).toLocaleTimeString("fi-FI") %></small>
+                
                     <%- `Unicafe ${mekuma.restaurant.restaurant}, ${mekuma.restaurant.address}, ${mekuma.restaurant.zip}, ${mekuma.restaurant.city}` %>
                 <p>
             </div>
+            <br/><br/>
         <% }) %>
         <% if(!found) { %>
             <%=  %>
