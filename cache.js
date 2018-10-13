@@ -14,7 +14,7 @@ const cache = (duration, type) => async (req, res, next) => {
 	} else {
 		res.sendResponse = res.send;
 		res.send = async (body) => {
-			await client.set(key, body);
+			await client.set(key, body, 'EX', config.cache);
 			res.sendResponse(body);
 		};
 		next();
