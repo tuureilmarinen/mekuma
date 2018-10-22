@@ -2,15 +2,17 @@
 
 <html lang="fi">
 <head>
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=<%= config.trackingId %>"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
+	<% if(config.trackingId){ %>
+		<!-- Global site tag (gtag.js) - Google Analytics -->
+		<script async src="https://www.googletagmanager.com/gtag/js?id=<%= config.trackingId %>"></script>
+		<script>
+			window.dataLayer = window.dataLayer || [];
+			function gtag(){dataLayer.push(arguments);}
+			gtag('js', new Date());
 
-        gtag('config', '<%= config.trackingId %>');
-    </script>
+			gtag('config', '<%= config.trackingId %>');
+		</script>
+	<% } %>
 
     <meta charset="utf-8">
 

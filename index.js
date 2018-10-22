@@ -1,9 +1,6 @@
 const http = require('http');
 const express = require('express');
-
-const app = express();
 const ical = require('ical-generator');
-
 const moment = require('moment');
 require('moment-timezone');
 const getRestaurantPaths = require('./getRestaurantPaths');
@@ -11,23 +8,16 @@ const getMenu = require('./getMenu');
 const parseMenuItems = require('./parseMenuItems');
 const mekumaFilter = require('./mekumaFilter');
 const cache = require('./cache');
-
-
 const config = require('./config');
 
-
+const app = express();
 app.set('view engine', 'ejs');
-
-// https://messi.hyyravintolat.fi/publicapi/restaurant/9
-
-// https://messi.hyyravintolat.fi/publicapi/restaurants
 
 app.get('/mekuma.ics', cache(config.cache, 'text/calendar'), async (req, res) => {
 	const cal = ical({
 		domain: 'mekuma.herokuapp.com',
 		prodId: { company: 'mekuma', product: 'ical-generator' },
 		name: 'Mekuma',
-		// timezone: 'Europe/Helsinki'
 	});
 
 	const restaurantPaths = await getRestaurantPaths(

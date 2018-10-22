@@ -1,10 +1,9 @@
 const fetch = require('node-fetch');
-const config = require('./config');
 require('format-unicorn');
 
 const getRestaurantPaths = async (path, template) => {
 	try {
-		const res = await fetch(config.restaurantListPath);
+		const res = await fetch(path);
 		const json = await res.json();
 		const list = json.data.map(r => ({
 			...r,
