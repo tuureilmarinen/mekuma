@@ -1,5 +1,3 @@
-const zeropad = require('zeropad');
-
 const parseDate = str => `${(str.split(' '))[1].split('.').reverse().join('-')}-${(new Date()).getFullYear()}`;
 
 const parseWeekday = str => str.split(' ')[0];
