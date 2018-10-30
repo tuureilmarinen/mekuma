@@ -1,3 +1,5 @@
+const zeropad = require('zeropad');
+
 const parseDate = str => `${(str.split(' '))[1].split('.').reverse().join('-')}-${(new Date()).getFullYear()}`;
 
 const parseWeekday = str => str.split(' ')[0];
@@ -13,7 +15,7 @@ module.exports = (data) => {
 				const hours = restaurant.information.lounas.regular.find(x => x.when.includes(weekday));
 				if (!hours) return;
 				const openHour = hours.open.replace('.', ':');
-				const closeHour = hours.open.replace('.', ':');
+				const closeHour = hours.close.replace('.', ':');
 				const open = Date.parse(`${time} ${openHour}`);
 				const close = Date.parse(`${time} ${closeHour}`);
 				date.data.forEach((food) => {
@@ -23,6 +25,8 @@ module.exports = (data) => {
 						date: time,
 						open,
 						close,
+						openHour,
+						closeHour,
 
 					};
 					items.push(menuItem);
