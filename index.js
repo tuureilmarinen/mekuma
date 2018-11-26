@@ -60,6 +60,15 @@ app.get('/', cache(config.cache, 'text/html'), async (req, res) => {
 	res.render('index', { mekumas, config });
 });
 
+app.get('/menu.json', cache(config.cache, 'application/json'), async (req, res) => {
+	const restaurantPaths = await getRestaurantPaths(config.restaurantListPath, config.restaurantPathTemplate); // eslint-disable-line max-len
+	const promises = restaurantPaths.map(async path => getMenu(path.url));
+	const results = await Promise.all(promises);
+	// restaurant -> date -> food
+	const menuItems = parseMenuItems(results);
+	res.send(JSON.stringify(menuItems));
+});
+
 const server = http.createServer(app);
 
 server.listen(config.port, () => {
