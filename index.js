@@ -66,6 +66,7 @@ app.get('/menu.json', cache(config.cache, 'application/json'), async (req, res) 
 	const results = await Promise.all(promises);
 	// restaurant -> date -> food
 	const menuItems = parseMenuItems(results);
+	res.header('Content-Type', 'application/json');
 	res.send(JSON.stringify(menuItems));
 });
 
