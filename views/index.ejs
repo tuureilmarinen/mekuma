@@ -40,8 +40,8 @@
                         <%- (new Date(parseInt(mekuma.open))).toDateString("fi-FI") %>
                     </small>
                 </h2>
-                <p>
-                    <b><%- (new Date(parseInt(mekuma.open))).toLocaleTimeString("fi-FI") %></b> - <b><%- (new Date(parseInt(mekuma.close))).toLocaleTimeString("fi-FI") %></b>
+                <p> 
+                    <b><%- mekuma.openHour %></b> - <b><%- mekuma.closeHour %></b>
                 
                     <%- `Unicafe ${mekuma.restaurant.restaurant}, ${mekuma.restaurant.address}, ${mekuma.restaurant.zip}, ${mekuma.restaurant.city}` %>
                 <p>

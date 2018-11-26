@@ -25,6 +25,7 @@
     "async-redis": "^1.1.4",
     "axios": "^0.18.0",
     "cors": "^2.8.4",
+    "dotenv": "^6.1.0",
     "ejs": "^2.6.1",
     "express": "^4.16.4",
     "format-unicorn": "^1.1.1",

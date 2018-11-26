@@ -12,8 +12,10 @@ module.exports = (data) => {
 
 				const hours = restaurant.information.lounas.regular.find(x => x.when.includes(weekday));
 				if (!hours) return;
-				const open = Date.parse(`${time} ${hours.open}`);
-				const close = Date.parse(`${time} ${hours.close}`);
+				const openHour = hours.open.replace('.', ':');
+				const closeHour = hours.close.replace('.', ':');
+				const open = Date.parse(`${time} ${openHour}`);
+				const close = Date.parse(`${time} ${closeHour}`);
 				date.data.forEach((food) => {
 					const menuItem = {
 						...food,
@@ -21,6 +23,8 @@ module.exports = (data) => {
 						date: time,
 						open,
 						close,
+						openHour,
+						closeHour,
 
 					};
 					items.push(menuItem);
