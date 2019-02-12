@@ -22,24 +22,24 @@
   },
   "homepage": "https://github.com/tuureilmarinen/mekuma#readme",
   "dependencies": {
-    "async-redis": "^1.1.4",
+    "async-redis": "^1.1.5",
     "axios": "^0.18.0",
-    "cors": "^2.8.4",
-    "dotenv": "^6.1.0",
+    "cors": "^2.8.5",
+    "dotenv": "^6.2.0",
     "ejs": "^2.6.1",
     "express": "^4.16.4",
     "format-unicorn": "^1.1.1",
-    "ical-generator": "^1.2.1",
+    "ical-generator": "^1.4.5",
     "jest": "^22.2.2",
     "memory-cache": "^0.2.0",
-    "moment": "^2.22.2",
-    "moment-timezone": "^0.5.21",
-    "node-fetch": "^2.2.0"
+    "moment": "^2.24.0",
+    "moment-timezone": "^0.5.23",
+    "node-fetch": "^2.3.0"
   },
   "devDependencies": {
-    "eslint": "^5.6.1",
+    "eslint": "^5.13.0",
     "eslint-config-airbnb-base": "^13.1.0",
-    "eslint-plugin-import": "^2.14.0",
-    "nodemon": "^1.14.12"
+    "eslint-plugin-import": "^2.16.0",
+    "nodemon": "^1.18.10"
   }
 }
